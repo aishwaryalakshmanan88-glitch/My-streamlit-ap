@@ -1,0 +1,6 @@
+.DS_Store
+node_modules
+.tmp
+mom_debug.log
+.env
+env

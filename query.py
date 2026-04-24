@@ -1,14 +1,10 @@
-__import__('pysqlite3')
-import sys
-import streamlit as st
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 from langchain.chains import create_retrieval_chain, create_history_aware_retriever
 from langchain_community.document_loaders import TextLoader
 from langchain_community.chat_models import ChatOpenAI
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores import FAISS
 from langchain_core.messages import HumanMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
@@ -57,7 +53,7 @@ qa_prompt = ChatPromptTemplate.from_messages(
 documents = TextLoader("./docs/faq.txt").load()
 text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=0)
 splits = text_splitter.split_documents(documents)
-vectorstore = Chroma.from_documents(splits, OpenAIEmbeddings(api_key=st.secrets["openai_api_key"]))
+vectorstore = FAISS.from_documents(splits, OpenAIEmbeddings(api_key=st.secrets["openai_api_key"]))
 retriever = vectorstore.as_retriever()
 
 # Retrieve and generate using the relevant snippets of the blog.

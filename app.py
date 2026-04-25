@@ -1,8 +1,12 @@
 import streamlit as st
 import openai
+import os
+from dotenv import load_dotenv
 from query import query
 
-API_KEY = st.secrets["openai_api_key"]
+load_dotenv()
+
+API_KEY = os.getenv("OPENAI_API_KEY")
 openai.api_key = API_KEY
 MODEL_ENGINE = "gpt-3.5-turbo"
 

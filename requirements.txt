@@ -1,3 +1,13 @@
-streamlit==1.56.0
-openai==2.32.0
-python-dotenv==1.2.2
+langchain
+langchain-community
+langchain-core
+langchain-openai
+langchain-text-splitters
+openai
+chromadb
+python-dotenv
+colorama
+tiktoken
+streamlit
+streamlit-chat
+pysqlite3
